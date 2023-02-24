@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<!--
+/**
+ * @author Jhonathan da silva
+ * @link https://github.com/jhonathan93
+ * @link https://www.linkedin.com/in/jhonathan-silva-367541171/
+ * @package Jhonathan_Graphics
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Jhonathan_Graphics" setup_version="1.0.0"/>
+</config>

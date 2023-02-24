@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Jhonathan da silva
+ * @link https://github.com/jhonathan93
+ * @link https://www.linkedin.com/in/jhonathan-silva-367541171/
+ * @package Jhonathan_Whatsapp
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <jhonathan_whatsapp>
+            <general>
+                <enabled>0</enabled>
+            </general>
+            <settings>
+                <icon_position>left</icon_position>
+            </settings>
+        </jhonathan_whatsapp>
+    </default>
+</config>

@@ -1,0 +1,65 @@
+<?php
+/**
+ * @author Jhonathan da silva
+ * @link https://github.com/jhonathan93
+ * @link https://www.linkedin.com/in/jhonathan-silva-367541171/
+ * @package Jhonathan_Vortex
+ */
+
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+use Jhonathan\Customer\Block\Widget\Dob;
+use Magento\Framework\Escaper;
+
+/**
+ * @var SecureHtmlRenderer $secureRenderer
+ * @var Dob $block
+ * @var Escaper $escaper
+ */
+
+$fieldCssClass = 'field date field-' . $block->getHtmlId();
+$fieldCssClass .= $block->isRequired() ? ' required' : '';
+?>
+
+<div class="js <?= $escaper->escapeHtmlAttr($fieldCssClass); ?>">
+    <label class="label" for="<?= $escaper->escapeHtmlAttr($block->getHtmlId()); ?>">
+        <span>
+            <?= $escaper->escapeHtml($block->getStoreLabel('dob')); ?>
+        </span>
+    </label>
+    <div class="control customer-dob">
+        <?= $block->getFieldHtml() ?>
+        <?php if ($_message = $block->getAdditionalDescription()): ?>
+            <div class="note">
+                <?= $escaper->escapeHtml($_message) ?>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+       "*": {
+           "Magento_Customer/js/validation": {}
+       }
+    }
+</script>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "js_init": {
+                "element" : {
+                    "0": "<?= "input#" .  $escaper->escapeJs($block->getFieldId('dob'))?>"
+                },
+
+                "mask" : {
+                    "0": "<?= $escaper->escapeJs($block->getMask()); ?>"
+                },
+
+                "validate": {
+                    "0" : "true"
+                }
+            }
+        }
+    }
+ </script>

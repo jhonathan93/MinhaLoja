@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Jhonathan da silva
+ * @link https://github.com/jhonathan93
+ * @link https://www.linkedin.com/in/jhonathan-silva-367541171/
+ * @package Jhonathan_Catalog
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Catalog\Block\Adminhtml\Category\Tab\Product" type="Jhonathan\Catalog\Block\Adminhtml\Category\Tab\Product"/>
+
+    <!-- START CUSTOM LOGGER -->
+    <virtualType name="Jhonathan\Catalog\Model\Method\VirtualDebug" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/catalog.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Jhonathan\Catalog\Model\Method\VirtualLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">Jhonathan\Catalog\Model\Method\VirtualDebug</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Jhonathan\Catalog\Model\Method\Logger">
+        <arguments>
+            <argument name="logger" xsi:type="object">Jhonathan\Catalog\Model\Method\VirtualLogger</argument>
+        </arguments>
+    </type>
+    <!-- END CUSTOM LOGGER -->
+</config>

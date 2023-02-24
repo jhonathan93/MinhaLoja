@@ -1,0 +1,41 @@
+/**
+ * @author Jhonathan da silva
+ * @link https://github.com/jhonathan93
+ * @link https://www.linkedin.com/in/jhonathan-silva-367541171/
+ * @package Jhonathan_Whatsapp
+ */
+
+div.js-whatsapp-simple {
+    width: 70px;
+    height: 70px;
+    position: fixed;
+    bottom: 32px;
+    z-index: 999;
+}
+
+div.js-whatsapp-multiple {
+    max-width: 30%;
+    position: fixed;
+    bottom: 32px;
+    z-index: 999;
+}
+
+div.js-whatsapp-multiple ul {
+    margin-bottom: 0;
+    padding: 12px;
+    background-color: #3fc11f;
+    list-style: none;
+    border-radius: 30px 0;
+}
+
+div.js-whatsapp-multiple ul li span {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+div.js-whatsapp-multiple ul li.number a {
+    float: right;
+}

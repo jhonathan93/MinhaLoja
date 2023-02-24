@@ -1,0 +1,47 @@
+<?php
+/**
+ * @author Jhonathan da silva
+ * @link https://github.com/jhonathan93
+ * @link https://www.linkedin.com/in/jhonathan-silva-367541171/
+ * @package Jhonathan_Vortex
+ */
+
+use Magento\Customer\Block\Widget\Telephone;
+use Magento\Framework\Escaper;
+
+/**
+ * @var Telephone $block
+ * @var Escaper $escaper
+ */
+?>
+
+<div class="js field telephone <?= $block->isRequired() ? 'required' : '' ?>">
+    <label for="telephone" class="label">
+        <span>
+            <?= $escaper->escapeHtml(__('Phone Number')); ?>
+        </span>
+    </label>
+    <div class="control">
+        <input type="tel" name="telephone" id="telephone" value="<?= $escaper->escapeHtmlAttr($block->getTelephone()); ?>" title="<?= $escaper->escapeHtmlAttr(__('Phone Number')); ?>" class="input-text <?= $escaper->escapeHtmlAttr($block->getAttributeValidationClass('telephone')); ?>">
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "js_init": {
+                "element" : {
+                    "0": "input#telephone"
+                },
+
+                "mask" : {
+                    "0": "(00) 00000-0000"
+                },
+
+                "validate": {
+                    "0": "false"
+                }
+            }
+        }
+    }
+</script>

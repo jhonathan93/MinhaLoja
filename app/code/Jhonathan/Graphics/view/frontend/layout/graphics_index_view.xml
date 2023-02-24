@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<!--
+/**
+ * @author Jhonathan da silva
+ * @link https://github.com/jhonathan93
+ * @link https://www.linkedin.com/in/jhonathan-silva-367541171/
+ * @package Jhonathan_Graphics
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Jhonathan\Graphics\Block\Graphics" name="Graphics" template="graphics.phtml" />
+        </referenceContainer>
+    </body>
+</page>

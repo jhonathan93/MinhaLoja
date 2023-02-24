@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Jhonathan da silva
+ * @link https://github.com/jhonathan93
+ * @link https://www.linkedin.com/in/jhonathan-silva-367541171/
+ * @package Jhonathan_Whatsapp
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Jhonathan_Whatsapp::css/whatsapp.css" rel="stylesheet" type="text/css"  />
+    </head>
+    <referenceContainer name="footer-container">
+        <block class="Jhonathan\Whatsapp\Block\Frontend\Whatsapp" ifconfig="Jhonathan_Whatsapp/general/enabled" name="js.whatsapp" template="Jhonathan_Whatsapp::whatsapp.phtml" after="-"/>
+    </referenceContainer>
+</page>

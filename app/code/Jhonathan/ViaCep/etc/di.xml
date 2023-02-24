@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @author Jhonathan da silva
+* @link https://github.com/jhonathan93
+* @link https://www.linkedin.com/in/jhonathan-silva-367541171/
+* @package Jhonathan_ViaCep
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- INTERFACE -->
+    <preference for="Jhonathan\ViaCep\Api\ViaCepInterface" type="Jhonathan\ViaCep\Model\ViaCep" />
+    <!-- INTERFACE -->
+
+    <!-- START CUSTOM LOGGER -->
+    <virtualType name="Jhonathan\ViaCep\Model\Method\VirtualDebug" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/viacep.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Jhonathan\ViaCep\Model\Method\VirtualLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">Jhonathan\ViaCep\Model\Method\VirtualDebug</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Jhonathan\ViaCep\Model\Method\Logger">
+        <arguments>
+            <argument name="logger" xsi:type="object">Jhonathan\ViaCep\Model\Method\VirtualLogger</argument>
+        </arguments>
+    </type>
+    <!-- END CUSTOM LOGGER -->
+</config>

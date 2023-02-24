@@ -1,0 +1,40 @@
+<?php
+/**
+ * @author Jhonathan da silva
+ * @link https://github.com/jhonathan93
+ * @link https://www.linkedin.com/in/jhonathan-silva-367541171/
+ * @package Jhonathan_Whatsapp
+ */
+
+use Jhonathan\Whatsapp\Block\Frontend\Whatsapp;
+
+/**
+ * @var $block Whatsapp
+ */
+?>
+
+<?php $multiple = $block->getData('multiple'); ?>
+
+<div class="js-whatsapp-multiple" id="js-whatsapp-multiple" <?= $block->getPosition(); ?>>
+    <?php $phones = $block->getNumberPhone($multiple); ?>
+    <?php if(!empty($phones)): ?>
+        <ul class="listNumber">
+            <?php foreach ($phones as $phone): ?>
+                <li class="number">
+                    <span class="title"><?= $phone['title']; ?></span>
+                    <a href="<?= $block->formatUrlWhatsapp((int)$phone['code'], $phone['number']); ?>" target="_blank">
+                        <?= $phone['number']; ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "#js-whatsapp-multiple": {
+            "js_whatsapp": {}
+        }
+    }
+</script>
