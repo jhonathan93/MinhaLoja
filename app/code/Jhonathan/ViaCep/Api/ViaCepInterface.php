@@ -12,7 +12,8 @@ namespace Jhonathan\ViaCep\Api;
  * Class Data
  * @package Jhonathan\ViaCep\Helper
  */
-interface ViaCepInterface {
+interface ViaCepInterface
+{
 
     /**
      * @param string $zipcode

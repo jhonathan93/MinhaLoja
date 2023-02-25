@@ -8,17 +8,20 @@
 
 namespace Jhonathan\Core\Helper\Data;
 
+use Magento\Backend\App\Config;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
-use Magento\Backend\App\ConfigInterface;
+use Magento\Framework\App\ObjectManager;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Model\ScopeInterface;
-use Magento\Backend\App\Config;
+use Magento\Store\Model\StoreManagerInterface;
 
 /**
  * Class AbstractData
  * @package Jhonathan\RibbonMarketing\Helper
  */
-class AbstractData extends AbstractHelper {
+class AbstractData extends AbstractHelper
+{
 
     /**
      * @var string
@@ -31,51 +34,49 @@ class AbstractData extends AbstractHelper {
     protected Config $backendConfig;
 
     /**
-     * @var ConfigInterface
+     * @var ObjectManager
      */
-    private ConfigInterface $config;
+    private ObjectManager $objectManager;
 
     /**
      * @param Context $context
      * @param string $module
-     * @param ConfigInterface $config
+     * @param Config $config
      */
-    public function __construct(Context $context, string $module, ConfigInterface $config) {
+    public function __construct(Context $context, string $module, Config $config)
+    {
         parent::__construct($context);
-        $this->config = $config;
-        $this->module = $module;
-    }
-
-    /**
-     * @param $group
-     * @param $code
-     * @param $storeId
-     * @return array|mixed
-     */
-    public function isEnabled($group = null, $code = null, $storeId = null): mixed {
-        return $this->getConfigGeneral($code, $group, $storeId);
+        $this->module = strtolower($module);
+        $this->backendConfig = $config;
+        $this->objectManager = ObjectManager::getInstance();
     }
 
     /**
      * @param string $code
-     * @param string $group
-     * @param null $storeId
-     * @return array|mixed
+     * @return mixed
      */
-    public function content(string $code, string $group, $storeId = null): mixed {
-        return $this->getConfigGeneral($code, $group, $storeId);
+    public function isEnabled(string $code): mixed
+    {
+        return $this->getConfigGeneral($code, $this->getStoreId());
     }
 
     /**
      * @param string $code
-     * @param string $group
-     * @param null $storeId
-     * @return array|mixed
+     * @return mixed
      */
-    public function getConfigGeneral(string $code, string $group, $storeId = null): mixed {
-        $code = '/' . $code;
-        $group = '/' . $group;
-        return $this->getConfigValue($this->module . $group . $code, $storeId);
+    public function content(string $code): mixed
+    {
+        return $this->getConfigGeneral($code, $this->getStoreId());
+    }
+
+    /**
+     * @param string $code
+     * @param int|null $storeId
+     * @return mixed
+     */
+    public function getConfigGeneral(string $code, int $storeId = null): mixed
+    {
+        return $this->getConfigValue($this->module . '/' . $code, $storeId);
     }
 
     /**
@@ -84,15 +85,26 @@ class AbstractData extends AbstractHelper {
      * @param string $scopeType
      * @return array|mixed
      */
-    public function getConfigValue($field, $scopeValue = null, string $scopeType = ScopeInterface::SCOPE_STORE): mixed {
+    public function getConfigValue($field, $scopeValue = null, string $scopeType = ScopeInterface::SCOPE_STORE): mixed
+    {
         if ($scopeValue === null) {
-            if (!$this->backendConfig) {
-                $this->backendConfig = $this->config;
-            }
-
             return $this->backendConfig->getValue($field);
         }
 
         return $this->scopeConfig->getValue($field, $scopeType, $scopeValue);
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getStoreId(): ?int
+    {
+        try {
+            /** @var StoreManagerInterface $storeManager */
+            $storeManager = $this->objectManager->create(StoreManagerInterface::class);
+            return $storeManager->getStore()->getWebsiteId();
+        } catch (NoSuchEntityException $e) {
+            return null;
+        }
     }
 }

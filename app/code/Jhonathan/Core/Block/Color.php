@@ -8,22 +8,24 @@
 
 namespace Jhonathan\Core\Block;
 
-use Magento\Framework\Data\Form\Element\AbstractElement;
-use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Backend\Block\Template\Context;
+use Magento\Config\Block\System\Config\Form\Field;
+use Magento\Framework\Data\Form\Element\AbstractElement;
 
 /**
  * Class Color
  * @package Jhonathan\Core\Block
  */
-class Color extends Field {
+class Color extends Field
+{
 
     /**
      * Color constructor.
      * @param Context $context
      * @param array $data
      */
-    public function __construct(Context $context, array $data = []) {
+    public function __construct(Context $context, array $data = [])
+    {
         parent::__construct($context, $data);
     }
 
@@ -31,7 +33,8 @@ class Color extends Field {
      * @param AbstractElement $element
      * @return string
      */
-    protected function _getElementHtml(AbstractElement $element): string {
+    protected function _getElementHtml(AbstractElement $element): string
+    {
         $html = $element->getElementHtml();
         $value = $element->getData("value");
 
@@ -40,10 +43,10 @@ class Color extends Field {
                 require(["jquery", "jquery/colorpicker/js/colorpicker"], ($) => {
                     $(document).ready(() => {
                         let $el = $("#' . $element->getHtmlId() . '");
-                        $el.css("backgroundColor", "'. $value .'");
+                        $el.css("backgroundColor", "' . $value . '");
     
                         $el.ColorPicker({
-                            color: "'. $value .'",
+                            color: "' . $value . '",
                             onChange: function (hsb, hex) {
                                 $el.css("backgroundColor", "#" + hex).val("#" + hex);
                             }

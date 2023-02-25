@@ -8,59 +8,69 @@
 
 namespace Jhonathan\Whatsapp\Block\Adminhtml\Grid;
 
-use Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray;
 use Jhonathan\Whatsapp\Block\Adminhtml\Grid\Renderer\Mask;
-use Magento\Framework\View\Element\BlockInterface;
+use Jhonathan\Whatsapp\Helper\Data as HelperData;
 use Magento\Backend\Block\Template\Context;
-use Jhonathan\Whatsapp\Model\Method\Logger;
-
-use Magento\Framework\View\Helper\SecureHtmlRenderer;
+use Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray;
 use Magento\Framework\Exception\LocalizedException;
+
+use Magento\Framework\View\Element\BlockInterface;
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
 
 /**
  * Class MultiSelect
  * @package Jhonathan\Whatsapp\Block\Adminhtml
  */
-class MultiSelect extends AbstractFieldArray {
+class MultiSelect extends AbstractFieldArray
+{
 
     /**
-     * @var Logger
+     * @var HelperData
      */
-    private Logger $logger;
+    private HelperData $helperData;
 
     /**
      * @param Context $context
-     * @param Logger $logger
+     * @param HelperData $helperData
      * @param array $data
      * @param SecureHtmlRenderer|null $secureRenderer
      */
-    public function __construct(Context $context,
-                                Logger $logger,
-                                array $data = [],
-                                ?SecureHtmlRenderer $secureRenderer = null) {
+    public function __construct(
+        Context $context,
+        HelperData $helperData,
+        array $data = [],
+        ?SecureHtmlRenderer $secureRenderer = null
+    ) {
         parent::__construct($context, $data, $secureRenderer);
-        $this->logger = $logger;
+        $this->helperData = $helperData;
     }
 
     /**
      * @return void
      */
-    protected function _prepareToRender(): void {
-        $this->addColumn('title', array(
+    protected function _prepareToRender(): void
+    {
+        $this->addColumn(
+            'title',
+            [
             'label' => __('Title'),
-            'class' => 'required-entry')
+            'class' => 'required-entry']
         );
 
-        $this->addColumn('code', array(
+        $this->addColumn(
+            'code',
+            [
             'label' => __('Country code'),
             'style' => 'max-width: 60px;',
-            'class' => 'required-entry')
+            'class' => 'required-entry']
         );
 
-        $this->addColumn('number', array(
+        $this->addColumn(
+            'number',
+            [
             'label' => __('Number'),
             'renderer' => $this->setMaskField(),
-            'class' => 'required-entry')
+            'class' => 'required-entry']
         );
 
         $this->_addAfter = false;
@@ -70,11 +80,12 @@ class MultiSelect extends AbstractFieldArray {
     /**
      * @return BlockInterface|null
      */
-    private function setMaskField(): ?BlockInterface {
+    private function setMaskField(): ?BlockInterface
+    {
         try {
             return $this->getLayout()->createBlock(Mask::class, '');
         } catch (LocalizedException $e) {
-            $this->logger->debug(['error' => $e->getMessage()], true);
+            $this->helperData->logger(['error' => $e->getMessage()], true);
             return null;
         }
     }

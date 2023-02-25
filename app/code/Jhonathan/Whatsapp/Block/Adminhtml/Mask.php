@@ -8,22 +8,24 @@
 
 namespace Jhonathan\Whatsapp\Block\Adminhtml;
 
-use Magento\Framework\Data\Form\Element\AbstractElement;
-use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Backend\Block\Template\Context;
+use Magento\Config\Block\System\Config\Form\Field;
+use Magento\Framework\Data\Form\Element\AbstractElement;
 
 /**
  * Class Mask
  * @package Jhonathan\Whatsapp\Block\Adminhtml
  */
-class Mask extends Field {
+class Mask extends Field
+{
 
     /**
      * Color constructor.
      * @param Context $context
      * @param array $data
      */
-    public function __construct(Context $context, array $data = []) {
+    public function __construct(Context $context, array $data = [])
+    {
         parent::__construct($context, $data);
     }
 
@@ -31,7 +33,8 @@ class Mask extends Field {
      * @param AbstractElement $element
      * @return string
      */
-    protected function _getElementHtml(AbstractElement $element): string {
+    protected function _getElementHtml(AbstractElement $element): string
+    {
         $html = $element->getElementHtml();
 
         $html .= '<script type="text/javascript">

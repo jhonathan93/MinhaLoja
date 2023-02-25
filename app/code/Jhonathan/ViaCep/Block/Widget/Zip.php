@@ -8,16 +8,17 @@
 
 namespace Jhonathan\ViaCep\Block\Widget;
 
-use Magento\Framework\View\Element\Template\Context;
 use Magento\Customer\Api\CustomerMetadataInterface;
 use Magento\Customer\Block\Widget\AbstractWidget;
 use Magento\Customer\Helper\Address;
+use Magento\Framework\View\Element\Template\Context;
 
 /**
  * Class Zip
  * @package Jhonathan\ViaCep\Block\Zip
  */
-class Zip extends AbstractWidget {
+class Zip extends AbstractWidget
+{
 
     /**
      * @param Context $context
@@ -25,10 +26,12 @@ class Zip extends AbstractWidget {
      * @param CustomerMetadataInterface $customerMetadata
      * @param array $data
      */
-    public function __construct(Context $context,
-                                Address $addressHelper,
-                                CustomerMetadataInterface $customerMetadata,
-                                array $data = []) {
+    public function __construct(
+        Context $context,
+        Address $addressHelper,
+        CustomerMetadataInterface $customerMetadata,
+        array $data = []
+    ) {
         parent::__construct($context, $addressHelper, $customerMetadata, $data);
     }
 
@@ -36,7 +39,8 @@ class Zip extends AbstractWidget {
      * Sets the template
      * @return void
      */
-    protected function _construct(): void {
+    protected function _construct(): void
+    {
         parent::_construct();
         $this->setTemplate('Jhonathan_ViaCep::widget/zip.phtml');
     }
@@ -45,7 +49,8 @@ class Zip extends AbstractWidget {
      * @param string $attributeCode
      * @return string
      */
-    public function getStoreLabel(string $attributeCode): string {
+    public function getStoreLabel(string $attributeCode): string
+    {
         $attribute = $this->_getAttribute($attributeCode);
         return $attribute ? __($attribute->getStoreLabel()) : 'CEP';
     }

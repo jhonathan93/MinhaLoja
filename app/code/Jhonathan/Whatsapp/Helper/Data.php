@@ -8,93 +8,63 @@
 
 namespace Jhonathan\Whatsapp\Helper;
 
-use Magento\Store\Model\StoreManagerInterface;
 use Jhonathan\Core\Helper\Data\AbstractData;
+use Jhonathan\ViaCep\Model\Method\Debug;
+use Magento\Backend\App\Config;
 use Magento\Framework\App\Helper\Context;
-use Magento\Framework\App\ObjectManager;
-use Magento\Backend\App\ConfigInterface;
-
-use Magento\Framework\Exception\NoSuchEntityException;
-use Psr\Log\LoggerInterface;
 
 /**
  * Class Data
  * @package Jhonathan\Whatsapp\Helper
  */
-class Data extends AbstractData {
-
+class Data extends AbstractData
+{
     /**
-     * @var string
+     * @var Debug
      */
-    const GROUPGENERAL = "general";
+    public Debug $debug;
 
-    /**
-     * @var string
-     */
-    const GROUPSETTINGS = "settings";
-
-    /**
-     * @var ObjectManager
-     */
-    private ObjectManager $objectManager;
-
-    /**
-     * @param Context $context
-     * @param ConfigInterface $config
-     */
-    public function __construct(Context $context, ConfigInterface $config) {
+    public function __construct(Context $context, Config $config, Debug $debug)
+    {
         parent::__construct($context, $this->_getModuleName(), $config);
-        $this->objectManager = ObjectManager::getInstance();
-    }
-
-    /**
-     * @param string $group
-     * @param $code
-     * @param $storeId
-     * @return array|mixed
-     */
-    public function isEnabled($group = null, $code = null, $storeId = null): mixed {
-        $storeId = $this->getStoreId($storeId);
-        return parent::isEnabled(self::GROUPGENERAL, 'enabled', $storeId);
+        $this->debug = $debug;
     }
 
     /**
      * @param string $code
-     * @param null $storeId
-     * @return array|mixed
+     * @return mixed
      */
-    public function getContent(string $code, $storeId = null): mixed {
-        $storeId = $this->getStoreId($storeId);
-        return parent::Content($code, self::GROUPSETTINGS, $storeId);
+    public function isEnabled(string $code): mixed
+    {
+        return parent::isEnabled($code);
     }
 
     /**
-     * @param $storeId
-     * @return false|int
+     * @param string $code
+     * @return mixed
      */
-    public function getStoreId($storeId): bool|int {
-        try {
-            if (is_null($storeId)) {
-                $storeManager = $this->objectManager->create(StoreManagerInterface::class);
-                return $storeManager->getStore()->getWebsiteId();
-            }
-            return $storeId;
-        } catch (NoSuchEntityException $e) {
-            return false;
-        }
+    public function getContent(string $code): mixed
+    {
+        return parent::Content($code);
     }
 
     /**
      * @return string
      */
-    public function _getModuleName(): string {
+    public function _getModuleName(): string
+    {
         return parent::_getModuleName();
     }
 
     /**
-     * @return LoggerInterface
+     * @param array $data
+     * @param bool $forceDebug
+     * @return void
      */
-    public function logger(): LoggerInterface {
-        return $this->_logger;
+    public function logger(array $data, bool $forceDebug): void
+    {
+        if ($forceDebug === true) {
+            $this->debug->debug($data);
+        }
     }
 }

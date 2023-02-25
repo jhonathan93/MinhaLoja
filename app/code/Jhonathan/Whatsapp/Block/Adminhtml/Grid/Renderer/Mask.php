@@ -17,17 +17,19 @@ use Magento\Framework\View\Element\Template;
  * @method getInputId()
  * @method getInputName()
  */
-class Mask extends Template {
+class Mask extends Template
+{
 
     /**
      * @var string
      */
-    CONST INPUT = '<input type="text" id="{{id}}" name="{{name}}" class="{{class}}" size="{{siz}}" style="{{style}}" />';
+    const INPUT = '<input type="text" id="{{id}}" name="{{name}}" class="{{class}}" size="{{siz}}" style="{{style}}" />';
 
     /**
      * @return string
      */
-    public function _toHtml(): string {
+    public function _toHtml(): string
+    {
         $column = $this->getColumn();
 
         $input = $this->replaceHtml('{{id}}', $this->getInputId(), self::INPUT);
@@ -68,7 +70,8 @@ class Mask extends Template {
      * @param string $subject
      * @return array|string|string[]
      */
-    protected function replaceHtml(string $search, string $replace, string $subject): array|string {
+    protected function replaceHtml(string $search, string $replace, string $subject): array|string
+    {
         return str_replace($search, $replace, $subject);
     }
 }

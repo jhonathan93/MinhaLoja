@@ -14,12 +14,14 @@ use Magento\Framework\Data\OptionSourceInterface;
  * Class Select
  * @package Mageuni\Whatsapp\Model\Config\Source
  */
-class Select implements OptionSourceInterface  {
+class Select implements OptionSourceInterface
+{
 
     /**
      * @return array[]
      */
-    public function toOptionArray(): array {
+    public function toOptionArray(): array
+    {
         return [
             ['value' => 'left', 'label' => __('left')],
             ['value' => 'right', 'label' => __('right')]
@@ -29,7 +31,8 @@ class Select implements OptionSourceInterface  {
     /**
      * @return array
      */
-    public function toArray(): array {
+    public function toArray(): array
+    {
         return ['left' => __('left'), 'right' => __('right')];
     }
 }

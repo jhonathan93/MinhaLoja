@@ -14,12 +14,14 @@ use Magento\Framework\Data\OptionSourceInterface;
  * Class Multiple
  * @package Mageuni\Whatsapp\Model\Config\Source
  */
-class Multiple implements OptionSourceInterface  {
+class Multiple implements OptionSourceInterface
+{
 
     /**
      * @return array[]
      */
-    public function toOptionArray(): array {
+    public function toOptionArray(): array
+    {
         return [
             ['value' => 1, 'label' => __('Yes')],
             ['value' => 0, 'label' => __('No')]
@@ -29,7 +31,8 @@ class Multiple implements OptionSourceInterface  {
     /**
      * @return array
      */
-    public function toArray(): array {
+    public function toArray(): array
+    {
         return ['Yes' => __('Yes'), 'No' => __('No')];
     }
 }

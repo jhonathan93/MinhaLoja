@@ -17,7 +17,7 @@ use Jhonathan\Whatsapp\Block\Frontend\Whatsapp;
 
 <div class="js-whatsapp-multiple" id="js-whatsapp-multiple" <?= $block->getPosition(); ?>>
     <?php $phones = $block->getNumberPhone($multiple); ?>
-    <?php if(!empty($phones)): ?>
+    <?php if (!empty($phones)): ?>
         <ul class="listNumber">
             <?php foreach ($phones as $phone): ?>
                 <li class="number">
@@ -30,11 +30,3 @@ use Jhonathan\Whatsapp\Block\Frontend\Whatsapp;
         </ul>
     <?php endif; ?>
 </div>
-
-<script type="text/x-magento-init">
-    {
-        "#js-whatsapp-multiple": {
-            "js_whatsapp": {}
-        }
-    }
-</script>

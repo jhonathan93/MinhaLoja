@@ -13,6 +13,6 @@
         <css src="Jhonathan_Whatsapp::css/whatsapp.css" rel="stylesheet" type="text/css"  />
     </head>
     <referenceContainer name="footer-container">
-        <block class="Jhonathan\Whatsapp\Block\Frontend\Whatsapp" ifconfig="Jhonathan_Whatsapp/general/enabled" name="js.whatsapp" template="Jhonathan_Whatsapp::whatsapp.phtml" after="-"/>
+        <block class="Jhonathan\Whatsapp\Block\Frontend\Whatsapp" ifconfig="jhonathan_whatsapp/general/enabled" name="js.whatsapp" template="Jhonathan_Whatsapp::whatsapp.phtml" after="-"/>
     </referenceContainer>
 </page>

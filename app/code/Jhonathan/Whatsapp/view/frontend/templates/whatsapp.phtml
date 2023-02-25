@@ -15,7 +15,7 @@ use Jhonathan\Whatsapp\Block\Frontend\Whatsapp;
 
 <?php $several = $block->hasSeveralNumbers(); ?>
 
-<?php if($several): ?>
+<?php if ($several): ?>
     <?=
         $block->addChild('whatsapp.theme.multiple', Whatsapp::class, [
             'multiple' => $several,
