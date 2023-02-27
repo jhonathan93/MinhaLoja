@@ -8,11 +8,11 @@
 
 namespace Jhonathan\Catalog\Block\Adminhtml\Category\Tab\Product\Grid\Renderer;
 
+use Jhonathan\Catalog\Helper\Data as HelperData;
+use Magento\Backend\Block\Context;
 use Magento\Backend\Block\Widget\Grid\Column\Renderer\AbstractRenderer;
 use Magento\Catalog\Api\ProductRepositoryInterface;
-use Jhonathan\Catalog\Model\Method\Logger as Debug;
 use Magento\Catalog\Helper\Image as ImageHelper;
-use Magento\Backend\Block\Context;
 use Magento\Framework\DataObject;
 
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -42,16 +42,16 @@ class Image extends AbstractRenderer
     protected Url $_url;
 
     /**
-     * @var Debug
+     * @var HelperData
      */
-    protected Debug $_debug;
+    private HelperData $helperData;
 
     /**
      * @param Context $context
      * @param ImageHelper $imageHelper
      * @param ProductRepositoryInterface $productRepositoryInterface
      * @param Url $url
-     * @param Debug $debug
+     * @param HelperData $helperData
      * @param array $data
      */
     public function __construct(
@@ -59,14 +59,14 @@ class Image extends AbstractRenderer
         ImageHelper $imageHelper,
         ProductRepositoryInterface $productRepositoryInterface,
         Url $url,
-        Debug $debug,
+        HelperData $helperData,
         array $data = []
     ) {
         parent::__construct($context, $data);
         $this->_imageHelper = $imageHelper;
         $this->_productRepositoryInterface = $productRepositoryInterface;
         $this->_url = $url;
-        $this->_debug = $debug;
+        $this->helperData = $helperData;
     }
 
     /**
@@ -83,7 +83,7 @@ class Image extends AbstractRenderer
                         <img src="' . $imageUrl . '" width="150" alt="' . $product->getName() . '" title="' . $product->getName() . '"/>
                     </a>';
         } catch (NoSuchEntityException $e) {
-            $this->_debug->debug(['error' => $e->getMessage()], true);
+            $this->helperData->logger(['error' => $e->getMessage()], true);
             return 'Error';
         }
     }

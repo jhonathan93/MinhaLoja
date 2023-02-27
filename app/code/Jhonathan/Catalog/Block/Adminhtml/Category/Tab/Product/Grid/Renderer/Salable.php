@@ -8,16 +8,16 @@
 
 namespace Jhonathan\Catalog\Block\Adminhtml\Category\Tab\Product\Grid\Renderer;
 
-use Jhonathan\Catalog\Model\Method\Logger as Debug;
+use Jhonathan\Catalog\Helper\Data as HelperData;
 use Magento\Backend\Block\Context;
 use Magento\Backend\Block\Widget\Grid\Column\Renderer\AbstractRenderer;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\CatalogInventory\Api\StockStateInterface;
 use Magento\Framework\DataObject;
-use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\InventorySalesApi\Api\GetProductSalableQtyInterface;
-use Magento\InventorySalesApi\Api\IsProductSalableInterface;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\InventoryConfigurationApi\Exception\SkuIsNotAssignedToStockException;
+use Magento\InventorySalesAdminUi\Model\GetSalableQuantityDataBySku;
 
 /**
  * Class Salable
@@ -25,10 +25,11 @@ use Magento\InventorySalesApi\Api\IsProductSalableInterface;
  */
 class Salable extends AbstractRenderer
 {
+
     /**
-     * @var GetProductSalableQtyInterface
+     * @var GetSalableQuantityDataBySku
      */
-    protected GetProductSalableQtyInterface $_salableQty;
+    private GetSalableQuantityDataBySku $getSalableQuantityDataBySku;
 
     /**
      * @var ProductRepositoryInterface
@@ -36,44 +37,36 @@ class Salable extends AbstractRenderer
     protected ProductRepositoryInterface $_productRepository;
 
     /**
-     * @var IsProductSalableInterface
-     */
-    protected IsProductSalableInterface $_isProductSalable;
-
-    /**
      * @var StockStateInterface
      */
     protected StockStateInterface $_stockState;
 
     /**
-     * @var Debug
+     * @var HelperData
      */
-    protected Debug $_debug;
+    private HelperData $helperData;
 
     /**
      * @param Context $context
-     * @param GetProductSalableQtyInterface $salableQty
      * @param ProductRepositoryInterface $productRepository
-     * @param IsProductSalableInterface $isProductSalable
+     * @param HelperData $helperData
+     * @param GetSalableQuantityDataBySku $getSalableQuantityDataBySku
      * @param StockStateInterface $stockState
-     * @param Debug $debug
      * @param array $data
      */
     public function __construct(
         Context $context,
-        GetProductSalableQtyInterface $salableQty,
         ProductRepositoryInterface $productRepository,
-        IsProductSalableInterface $isProductSalable,
+        HelperData $helperData,
+        GetSalableQuantityDataBySku $getSalableQuantityDataBySku,
         StockStateInterface $stockState,
-        Debug $debug,
         array $data = []
     ) {
         parent::__construct($context, $data);
-        $this->_salableQty = $salableQty;
         $this->_productRepository = $productRepository;
-        $this->_isProductSalable = $isProductSalable;
+        $this->helperData = $helperData;
+        $this->getSalableQuantityDataBySku = $getSalableQuantityDataBySku;
         $this->_stockState = $stockState;
-        $this->_debug = $debug;
     }
 
     /**
@@ -86,20 +79,17 @@ class Salable extends AbstractRenderer
             $product = $this->_productRepository->getById($productId);
 
             if ($this->_stockState->getStockQty($productId, $product->getStoreid()) > 0) {
-                if ($this->_isProductSalable->execute($product->getSku(), $product->getStoreId())) {
-                    $Qty = $this->_salableQty->execute($product->getSku(), $product->getStoreId());
-
-                    if ($Qty > 0) {
-                        return $Qty;
-                    } else {
-                        return 0;
+                $qty = $this->getSalableQuantityDataBySku->execute($product->getSku());
+                if (array_key_exists(0, $qty)) {
+                    if ($qty[0]['qty'] > 0) {
+                        return $qty[0]['qty'];
                     }
                 }
             }
 
             return 0;
-        } catch (LocalizedException | InputException $e) {
-            $this->_debug->debug(['error' => $e->getMessage()], true);
+        } catch (LocalizedException | NoSuchEntityException | SkuIsNotAssignedToStockException $e) {
+            $this->helperData->logger(['error' => $e->getMessage(), 'ID' => $productId], true);
             return 'Error';
         }
     }

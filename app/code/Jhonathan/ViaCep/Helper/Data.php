@@ -93,7 +93,7 @@ class Data extends AbstractData
      */
     public function logger(array $data, bool $forceDebug): void
     {
-        if ($forceDebug === true || $this->isEnabled('logging/enabled') === true) {
+        if ($forceDebug === true || (bool)$this->isEnabled('logging/enabled') === true) {
             $this->debug->debug($data);
         }
     }

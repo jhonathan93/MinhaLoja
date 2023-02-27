@@ -22,7 +22,7 @@
             </argument>
         </arguments>
     </virtualType>
-    <type name="Jhonathan\Whatsapp\Model\Method\Logger">
+    <type name="Jhonathan\Whatsapp\Model\Method\Debug">
         <arguments>
             <argument name="logger" xsi:type="object">Jhonathan\Whatsapp\Model\Method\VirtualLogger</argument>
         </arguments>

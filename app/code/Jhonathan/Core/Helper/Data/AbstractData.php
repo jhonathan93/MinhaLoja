@@ -18,7 +18,7 @@ use Magento\Store\Model\StoreManagerInterface;
 
 /**
  * Class AbstractData
- * @package Jhonathan\RibbonMarketing\Helper
+ * @package Jhonathan\Core\Helper\Data
  */
 class AbstractData extends AbstractHelper
 {
