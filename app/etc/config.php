@@ -348,6 +348,7 @@ return [
         'Jhonathan_Core' => 1,
         'Jhonathan_Customer' => 1,
         'Jhonathan_Graphics' => 1,
+        'Jhonathan_ProgressBar' => 1,
         'Jhonathan_ViaCep' => 1,
         'Jhonathan_Whatsapp' => 1,
         'PayPal_Braintree' => 1,

@@ -95,6 +95,15 @@ class AbstractData extends AbstractHelper
     }
 
     /**
+     * @param string $code
+     * @return mixed
+     */
+    public function getAnyConfigValue(string $code): mixed
+    {
+        return $this->scopeConfig->getValue($code, ScopeInterface::SCOPE_STORE, $this->getStoreId());
+    }
+
+    /**
      * @return int|null
      */
     public function getStoreId(): ?int
