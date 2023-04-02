@@ -71,6 +71,7 @@ class Progress extends Cart
         return [
             'percent' => $this->getPercent(),
             'text' => $this->getProgressText(),
+            'colors' => $this->helperData->getColors(),
         ];
     }
 

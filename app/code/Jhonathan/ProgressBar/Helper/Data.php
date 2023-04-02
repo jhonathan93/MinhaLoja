@@ -52,6 +52,18 @@ class Data extends AbstractData
     }
 
     /**
+     * @return array
+     */
+    public function getColors(): array
+    {
+        return [
+            'text' => $this->content('settings/text_color'),
+            'color1' => $this->content('settings/color1'),
+            'color2' => $this->content('settings/color2')
+        ];
+    }
+
+    /**
      * @param array $data
      * @param bool $forceDebug
      * @return void

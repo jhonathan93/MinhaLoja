@@ -23,6 +23,27 @@
                     <comment><![CDATA[Enable Autocomplete ViaCep]]></comment>
                 </field>
             </group>
+            <group id="settings" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Settings</label>
+                <field id="text_color" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Text color</label>
+                    <frontend_model>Jhonathan\Core\Block\Color</frontend_model>
+                    <validate>required-entry</validate>
+                    <comment><![CDATA[]]></comment>
+                </field>
+                <field id="color1" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Colored background bar</label>
+                    <frontend_model>Jhonathan\Core\Block\Color</frontend_model>
+                    <validate>required-entry</validate>
+                    <comment><![CDATA[]]></comment>
+                </field>
+                <field id="color2" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Color foreground bar</label>
+                    <frontend_model>Jhonathan\Core\Block\Color</frontend_model>
+                    <validate>required-entry</validate>
+                    <comment><![CDATA[]]></comment>
+                </field>
+            </group>
             <group id="logging" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Debug</label>
                 <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">

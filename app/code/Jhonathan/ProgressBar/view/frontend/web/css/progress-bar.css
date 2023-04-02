@@ -1,13 +1,10 @@
 .js-content-progress {
-    border: 1px solid #e40046;
-    background-color: #e40046;
     margin: 3px 0;
     width: 100%;
     border-radius: 10px;
     position: relative
 }
 .js-content-progress .js-progress-bar-percent {
-    background-color: #fab5c1;
     border-radius: 10px;
 }
 
