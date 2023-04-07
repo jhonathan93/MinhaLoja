@@ -52,12 +52,11 @@ class AbstractData extends AbstractHelper
     }
 
     /**
-     * @param string $code
-     * @return mixed
+     * @return bool
      */
-    public function isEnabled(string $code): mixed
+    public function isEnabled(): bool
     {
-        return $this->getConfigGeneral($code, $this->getStoreId());
+        return (bool)$this->getConfigGeneral('general/enabled', $this->getStoreId());
     }
 
     /**

@@ -36,12 +36,11 @@ class Data extends AbstractData
     }
 
     /**
-     * @param string $code
-     * @return mixed
+     * @return bool
      */
-    public function isEnabled(string $code): mixed
+    public function isEnabled(): bool
     {
-        return parent::isEnabled($code);
+        return parent::isEnabled();
     }
 
     /**

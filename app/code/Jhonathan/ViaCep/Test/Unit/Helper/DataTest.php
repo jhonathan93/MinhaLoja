@@ -8,17 +8,18 @@
 
 namespace Jhonathan\ViaCep\Test\Unit\Helper;
 
-use PHPUnit_Framework_MockObject_MockObject;
+use Exception;
 use Jhonathan\ViaCep\Helper\Data;
 use PHPUnit\Framework\TestCase;
 
-use Exception;
+use PHPUnit_Framework_MockObject_MockObject;
 
 /**
  * Class DataTest
  * @package Jhonathan\ViaCep\Test\Unit\Helper
  */
-class DataTest extends TestCase {
+class DataTest extends TestCase
+{
 
     /**
      * @var Data|PHPUnit_Framework_MockObject_MockObject
@@ -28,7 +29,8 @@ class DataTest extends TestCase {
     /**
      * @return void
      */
-    public function setUp(): void {
+    public function setUp(): void
+    {
         $this->data = $this->getMockBuilder(Data::class)
         ->disableOriginalConstructor()
         ->getMock();
@@ -37,11 +39,11 @@ class DataTest extends TestCase {
     /**
      * @return void
      */
-    public function testRequest(): void {
+    public function testRequest(): void
+    {
         try {
             $this->assertEquals('teste', $this->data->request('86037752'));
         } catch (Exception $e) {
-
         }
     }
 }

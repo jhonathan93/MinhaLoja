@@ -347,6 +347,7 @@ return [
         'Jhonathan_Catalog' => 1,
         'Jhonathan_Core' => 1,
         'Jhonathan_Customer' => 1,
+        'Jhonathan_CustomerBlock' => 1,
         'Jhonathan_Graphics' => 1,
         'Jhonathan_ProgressBar' => 1,
         'Jhonathan_ViaCep' => 1,

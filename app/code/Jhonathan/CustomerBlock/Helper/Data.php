@@ -3,19 +3,19 @@
  * @author Jhonathan da silva
  * @link https://github.com/jhonathan93
  * @link https://www.linkedin.com/in/jhonathan-silva-367541171/
- * @package Jhonathan_Whatsapp
+ * @package Jhonathan_CustomerBlock
  */
 
-namespace Jhonathan\Whatsapp\Helper;
+namespace Jhonathan\CustomerBlock\Helper;
 
 use Jhonathan\Core\Helper\Data\AbstractData;
-use Jhonathan\ViaCep\Model\Method\Debug;
+use Jhonathan\CustomerBlock\Model\Method\Debug;
 use Magento\Backend\App\Config;
 use Magento\Framework\App\Helper\Context;
 
 /**
  * Class Data
- * @package Jhonathan\Whatsapp\Helper
+ * @package Jhonathan\CustomerBlock\Helper
  */
 class Data extends AbstractData
 {
@@ -42,17 +42,9 @@ class Data extends AbstractData
      * @param string $code
      * @return mixed
      */
-    public function getContent(string $code): mixed
+    public function content(string $code): mixed
     {
-        return parent::Content($code);
-    }
-
-    /**
-     * @return string
-     */
-    public function _getModuleName(): string
-    {
-        return parent::_getModuleName();
+        return parent::content($code);
     }
 
     /**
@@ -62,7 +54,7 @@ class Data extends AbstractData
      */
     public function logger(array $data, bool $forceDebug): void
     {
-        if ($forceDebug === true) {
+        if ($forceDebug === true || (bool)$this->content('logging/enabled') === true) {
             $this->debug->debug($data);
         }
     }

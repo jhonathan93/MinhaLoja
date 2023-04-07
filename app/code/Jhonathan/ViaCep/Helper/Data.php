@@ -78,12 +78,20 @@ class Data extends AbstractData
     }
 
     /**
+     * @return bool
+     */
+    public function isEnabled(): bool
+    {
+        return parent::isEnabled();
+    }
+
+    /**
      * @param string $code
      * @return mixed
      */
-    public function isEnabled(string $code): mixed
+    public function content(string $code): mixed
     {
-        return parent::isEnabled($code);
+        return parent::content($code);
     }
 
     /**
@@ -93,7 +101,7 @@ class Data extends AbstractData
      */
     public function logger(array $data, bool $forceDebug): void
     {
-        if ($forceDebug === true || (bool)$this->isEnabled('logging/enabled') === true) {
+        if ($forceDebug === true || (bool)$this->content('logging/enabled') === true) {
             $this->debug->debug($data);
         }
     }
