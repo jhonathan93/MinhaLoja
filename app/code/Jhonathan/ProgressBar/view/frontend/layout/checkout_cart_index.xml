@@ -14,7 +14,7 @@
     </head>
     <body>
         <referenceContainer name="content">
-            <block class="Jhonathan\ProgressBar\Block\Frontend\Progress"  name="progress.bar" before="-" template="Jhonathan_ProgressBar::progress.phtml"/>
+            <block class="Jhonathan\ProgressBar\Block\Frontend\Progress" ifconfig="jhonathan_progressbar/general/enabled" name="progress.bar" before="-" template="Jhonathan_ProgressBar::progress.phtml"/>
         </referenceContainer>
     </body>
 </page>

@@ -15,7 +15,9 @@ use Jhonathan\ProgressBar\Block\Frontend\Progress;
 
 <?php $data = $block->execute(); ?>
 
-<div class="js-content-progress" style="background-color: <?= $data['colors']['color1']?>; border: 1px solid <?= $data['colors']['color1']?>;">
-    <div class="js-progress-bar-percent" style="background-color: <?= $data['colors']['color2']?>; width: <?= $data['percent']; ?>%;">&nbsp;</div>
-    <div class="js-progress-bar-text" style="color: <?= $data['colors']['text']?>;"><?= $data['text']; ?></div>
-</div>
+<?php if ($block->IsFreShippingActive()): ?>
+    <div class="js-content-progress" style="background-color: <?= $data['colors']['color1']?>; border: 1px solid <?= $data['colors']['color1']?>;">
+        <div class="js-progress-bar-percent" style="background-color: <?= $data['colors']['color2']?>; width: <?= $data['percent']; ?>%;">&nbsp;</div>
+        <div class="js-progress-bar-text" style="color: <?= $data['colors']['text']?>;"><?= $data['text']; ?></div>
+    </div>
+<?php endif; ?>

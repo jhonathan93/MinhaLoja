@@ -76,13 +76,21 @@ class Progress extends Cart
     }
 
     /**
+     * @return bool
+     */
+    public function IsFreShippingActive(): bool
+    {
+        return $this->helperData->IsFreShippingActive();
+    }
+
+    /**
      * @return float
      */
     private function calculate(): float
     {
         $quote = $this->getQuote();
         $subTotal = $quote->getSubtotal();
-        if (true && !is_null($quote->getAppliedRuleIds())) {
+        if (!is_null($quote->getAppliedRuleIds())) {
             $subTotal = $quote->getSubtotalWithDiscount();
         }
 
